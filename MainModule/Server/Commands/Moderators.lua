@@ -8,7 +8,6 @@ return function(Vargs, env)
 
 	if env then setfenv(1, env) end
 
-	local Routine = env.Routine
 	local Pcall = env.Pcall
 
 	return {
@@ -593,7 +592,7 @@ return function(Vargs, env)
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
 					if v.Character then
-						Routine(function()
+						task.defer(function()
 							for _, c in v.Character:GetChildren() do
 								if c:IsA("ForceField") and c.Name ~= "ADONIS_FULLGOD" then
 									c:Destroy()
@@ -648,7 +647,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if v.Character then
 							for a, obj in v.Character:GetChildren() do
 								if obj:IsA("BasePart") and obj.Name ~= "HumanoidRootPart" then obj.Anchored = true end
@@ -667,7 +666,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
 							local ice = v.Character:FindFirstChild("Adonis_Ice")
 							local plate
@@ -715,7 +714,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						local ff = service.New("ForceField", v.Character)
 						local hum = v.Character.Humanoid
 						local orig = hum.MaxHealth
@@ -1299,7 +1298,7 @@ return function(Vargs, env)
 			end;
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						Remote.MakeGui(plr, "List", {
 							Title = `{service.FormatPlayer(v)}'s tools`;
 							Icon = server.MatIcons["Inventory 2"];
@@ -2062,8 +2061,8 @@ return function(Vargs, env)
 					end
 				end
 
-					for i, v in players do
-					Routine(function()
+					for _, v in players do
+					task.defer(function()
 						local response = Remote.GetGui(v, "Vote", {
 							Question = question;
 							Answers = anstab;
@@ -2150,8 +2149,8 @@ return function(Vargs, env)
 					end
 				end
 
-				for i, v in players do
-					Routine(function()
+				for _, v in players do
+					task.defer(function()
 						local response = Remote.GetGui(v, "Vote", {
 							Question = question;
 							Answers = anstab;
@@ -2375,9 +2374,9 @@ return function(Vargs, env)
 				local deleteAll = args[2] and (args[2]:lower() == "true" or args[2]:lower() == "yes")
 				for _, v in service.GetPlayers(plr, args[1]) do
 					if deleteAll then
-						Routine(Remote.RemoveGui, v, true)
+						task.defer(Remote.RemoveGui, v, true)
 					else
-						Routine(function()
+						task.defer(function()
 							for _, guiName in {"Message", "Hint", "Notify", "Effect", "Alert"} do
 								Remote.RemoveGui(v, guiName)
 							end
@@ -3124,13 +3123,13 @@ return function(Vargs, env)
 				target_humandescrip = target_humandescrip:Clone()
 
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if (v and v.Character and v.Character:FindFirstChildOfClass("Humanoid")) and (target and target.Character and target.Character:FindFirstChildOfClass("Humanoid")) then
 							v.Character.Archivable = true
 
-							for _, a in v.Character:GetChildren() do
-								if a:IsA("Accessory") then
-									a:Destroy()
+							for _, obj in v.Character:GetChildren() do
+								if obj:IsA("Accessory") then
+									obj:Destroy()
 								end
 							end
 
@@ -4564,7 +4563,7 @@ return function(Vargs, env)
 					ReservedServerAccessCode = reservedServerInfo.Code
 				}) else nil
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if
 							Remote.MakeGuiGet(v, "Notification", {
 								Title = "Teleport";
@@ -6148,7 +6147,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") then
 							local xran local zran
 							repeat xran = math.random(-9999, 9999) until math.abs(xran) >= 5555
@@ -6379,7 +6378,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						v.CharacterAppearanceId = v.UserId
 
 						local Humanoid = v.Character and v.Character:FindFirstChildOfClass("Humanoid")
