@@ -432,7 +432,7 @@ return function(Vargs, GetEnv)
 				if not p.Parent then
 					return false
 				elseif not parentObj then
-					p:Kick("\n[CLI-102495] Loading Error \nPlayerGui Missing (Waited 10 Minutes)")
+					p:Kick("::Adonis:: Loading Error - PlayerGui Missing (Waited 10 Minutes)")
 					return false
 				end
 
@@ -484,14 +484,14 @@ return function(Vargs, GetEnv)
 				end)
 
 				if not ok then
-					p:Kick(`\n[CLI-192385] Loading Error \n[HookClient Error: {err}]`)
+					p:Kick(`::Adonis:: Loading Error - [HookClient Error: {err}]`)
 					return false
 				else
 					return true
 				end
 			else
 				if p and p.Parent then
-					p:Kick("\n[CLI-5691283] Loading Error \n[HookClient: Keys Missing]")
+					p:Kick("::Adonis:: Loading Error - [HookClient: Keys Missing]")
 				end
 			end
 		end;
