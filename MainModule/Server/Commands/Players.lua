@@ -8,7 +8,6 @@ return function(Vargs, env)
 
 	if env then setfenv(1, env) end
 
-	local Routine = env.Routine
 	local Pcall = env.Pcall
 
 	return {
@@ -378,7 +377,7 @@ return function(Vargs, env)
 							Variables.HelpRequests[plr.Name] = pending;
 
 							for ind, p in service.Players:GetPlayers() do
-								Routine(function()
+								task.defer(function()
 									if Admin.CheckAdmin(p) then
 										local ret = Remote.MakeGuiGet(p, "Notification", {
 											Title = "Help Request";
