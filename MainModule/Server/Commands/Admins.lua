@@ -9,8 +9,6 @@ return function(Vargs, env)
 
 	if env then setfenv(1, env) end
 
-	local Routine = env.Routine
-
 	return {
 
 		SetRank = {
@@ -1122,7 +1120,7 @@ return function(Vargs, env)
 				for _, v in service.GetPlayers(plr, args[1]) do
 					service.StopLoop(`{v.UserId}LOOPKILL`)
 					local count = 0
-					Routine(service.StartLoop, `{v.UserId}LOOPKILL`, 3, function()
+					task.spawn(service.StartLoop, `{v.UserId}LOOPKILL`, 3, function()
 						local hum = v.Character and v.Character:FindFirstChildOfClass("Humanoid")
 						if hum and hum.Health > 0 then
 							hum.Health = 0
