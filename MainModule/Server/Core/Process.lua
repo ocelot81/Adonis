@@ -786,7 +786,7 @@ return function(Vargs, GetEnv)
 
 				if Variables.ServerLock and level < 1 then
 					Remote.Clients[key] = nil;
-					p:Kick(Variables.LockMessage or "::Adonis::\nServer Locked")
+					p:Kick(Variables.LockMessage or "::Adonis:: Server Locked")
 					return "REMOVED"
 				end
 
@@ -803,7 +803,7 @@ return function(Vargs, GetEnv)
 
 					if not listed and level == 0 then
 						Remote.Clients[key] = nil;
-						p:Kick(Variables.LockMessage or "::Adonis::\nWhitelist Enabled")
+						p:Kick(Variables.LockMessage or "::Adonis:: Whitelist Enabled")
 						return "REMOVED"
 					end
 				end
@@ -833,7 +833,7 @@ return function(Vargs, GetEnv)
 			if not ran then
 				AddLog("Errors", `{p.Name} PlayerAdded Failed: {err}`)
 				warn("~! :: Adonis :: SOMETHING FAILED DURING PLAYERADDED:")
-				warn(tostring(err))
+				warn(err)
 			end
 
 			if Remote.Clients[key] then
@@ -877,7 +877,7 @@ return function(Vargs, GetEnv)
 					end
 				end)
 			elseif ran and err ~= "REMOVED" then
-				Anti.RemovePlayer(p, "\n:: Adonis ::\nLoading Error [Missing player, keys, or removed]")
+				Anti.RemovePlayer(p, ":: Adonis :: Loading Error [Missing player, keys, or removed]")
 			end
 		end;
 
