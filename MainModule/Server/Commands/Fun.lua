@@ -8,7 +8,6 @@ return function(Vargs, env)
 
 	if env then setfenv(1, env) end
 
-	local Routine = env.Routine
 	local Pcall = env.Pcall
 
 	return {
@@ -323,7 +322,7 @@ return function(Vargs, env)
 				assert(args[2] == nil or table.find({"yes", "y", "true", "no", "n", "false"}, args[2]:lower()), "Invalid boolean argument type")
 
 				for _, v in service.GetPlayers(plr, args[1], {UseFakePlayer = true}) do
-					Routine(function()
+					task.defer(function()
 						local targetName = service.Players:GetNameFromUserIdAsync(v.UserId)
 
 						local tool = service.New("Tool", {
@@ -1897,7 +1896,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
 							Admin.RunCommand(`{Settings.Prefix}pants`, v.Name, "233373970")
 							Admin.RunCommand(`{Settings.Prefix}shirt`, v.Name, "133078195")
@@ -2027,7 +2026,7 @@ return function(Vargs, env)
 						local run = true
 						local k = service.New("StringValue", v.Character)
 						k.Name = "Epix Puke"
-						Routine(function()
+						task.defer(function()
 							repeat
 								task.wait(0.07)
 								local p = service.New("Part", v.Character)
@@ -2098,7 +2097,7 @@ return function(Vargs, env)
 						local run = true
 						local k = service.New("StringValue", v.Character)
 						k.Name = "ADONIS_BLEED"
-						Routine(function()
+						task.defer(function()
 							repeat
 								task.wait(0.15)
 								v.Character:FindFirstChildOfClass("Humanoid"):TakeDamage(1)
@@ -2174,7 +2173,7 @@ return function(Vargs, env)
 				}
 
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						local humanoid = v.Character:FindFirstChildOfClass("Humanoid")
 						if humanoid and not v.Character:FindFirstChild("Adonis_Poisoned") then
 							local description, orgColors = humanoid:GetAppliedDescription(), {}
@@ -2492,7 +2491,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr: Player, args: {string})
 				for kay, player in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						local torso = player.Character:FindFirstChild("HumanoidRootPart")
 						if torso then
 							local hole = service.New("Part", player.Character)
@@ -4173,7 +4172,7 @@ return function(Vargs, env)
 			AdminLevel = "Moderators";
 			Function = function(plr, args)
 				for _, v in service.GetPlayers(plr, args[1]) do
-					Routine(function()
+					task.defer(function()
 						if v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
 							for _, obj in v.Character:GetChildren() do
 								if obj:IsA("BasePart") and obj.Name ~= "HumanoidRootPart" then obj.Anchored = true end
